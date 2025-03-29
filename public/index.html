@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clipboard P2P</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    label {
+      margin-top: 1rem;
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    input, button, select {
+      margin-top: 0.5rem;
+      padding: 0.6rem 0.8rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #00d323;
+      color: white;
+      border: none;
+      transition: background-color 0.2s ease;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: #00a81c;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.3rem;
+    }
+
+    p {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .divider {
+      margin: 2rem 0;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 VISTA 1: Home -->
+  <div id="home-view" class="view active">
+    <h2>📋 Clipboard P2P</h2>
+    
+    <label for="session-id">ID della sessione</label>
+    <input id="session-id" placeholder="es: abc123" />
+    
+    <button onclick="Invia()">Entra</button>
+    <div id="wait-ui" style="display: none; margin-top: 1rem;">
+      <p id="wait-msg">⏳ Aspetta che l'host ti accetti...</p>
+      <button id="cancel-wait" style="background-color: #999;" onclick="annullaRichiesta()">❌ Annulla richiesta</button>
+    </div>
+    
+    <p>Se la sessione non esiste, ne verrà creata una nuova.<br>
+       Se esiste, chiederai all'host di unirti.</p>
+  </div>
+
+  <!-- 🔸 VISTA 2: Sessione attiva -->
+  <div id="session-view" class="view">
+    <h2>Sessione attiva: <span id="view-session-id"></span></h2> 
+
+    <button onclick="Abbandona()">Abbandona sessione</button>
+
+    <div class="divider"></div>
+    <h4>Richieste in attesa:</h4>
+    <ul id="join-requests"></ul>
+
+    <h4>Peer connessi:</h4>
+    <ul id="peer-list"></ul>
+
+    <!--
+    <label>Invia solo a (opzionale):</label>
+    <select id="target-peer">
+      <option value="">Tutti</option>
+    </select>
+    -->
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
