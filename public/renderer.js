@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://95.239.205.99:3001");
+const socket = new WebSocket("ws://79.23.73.102:3001");
 let pc = new RTCPeerConnection();
 let channel;
 let peerId = "";

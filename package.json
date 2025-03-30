@@ -11,8 +11,10 @@
     "publish": {
       "provider": "github",
       "owner": "DiegoStefanini",
-      "repo": "clipboard"
+      "repo": "clipboard",
+      "vPrefixedTagName": false
     },
+
     "win": {
       "target": "nsis",
       "artifactName": "Clipboard-Setup-${version}.${ext}"
